@@ -1,0 +1,12 @@
+{% extends 'community/base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<h2>Your Posts</h2>
+<ul>
+    {% for post in user_posts %}
+        <li>{{ post.title }} on {{ post.created_at }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

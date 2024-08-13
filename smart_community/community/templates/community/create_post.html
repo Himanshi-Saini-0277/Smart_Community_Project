@@ -1,0 +1,36 @@
+{% extends 'community/base.html' %}
+
+{% block title %}Create Post{% endblock %}
+
+{% block content %}
+<div class="create-post-container">
+    
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- First Row: Centered Heading -->
+        <div><h2 class="post-heading text-center">Create a New Post</h2></div>
+        
+        <!-- Second Row: Input Fields in Separate Columns -->
+        <div class="form-row text-center">
+            <div class="form-group">
+                <label for="{{ form.title.id_for_label }}">Title:</label>
+                {{ form.title }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.image.id_for_label }}">Upload Image:</label>
+                {{ form.image }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.content.id_for_label }}">Content:</label>
+                {{ form.content }}
+            </div>
+        </div>
+
+        <!-- Third Row: Centered Submit Button -->
+        <div class="text-center">
+            <button type="submit" class="submit-button">Submit</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

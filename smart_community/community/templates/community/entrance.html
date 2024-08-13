@@ -1,0 +1,61 @@
+{% extends 'community/base.html' %}
+
+{% load static %}
+
+{% block title %}Welcome to Smart Community Engagement{% endblock %}
+
+{% block content %}
+<div class="entrance-container">
+    <header class="entrance-header">
+        <h1>Smart Community Engagement</h1>
+        <p>Connecting Communities for a Better Tomorrow</p>
+    </header>
+    
+    <div class="entrance-buttons">
+        <a href="{% url 'login' %}" class="btn">Login</a>
+        <a href="{% url 'signup' %}" class="btn">Sign Up</a>
+    </div>
+</div>
+{% endblock %}
+
+<style>
+    .entrance-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; /* Full height of the viewport */
+        background-image: url("{% static 'community/static/images/pic.png' %}"); /* Background image */
+        background-size: cover; /* Cover the entire area */
+        color: white; /* Text color */
+        text-align: center; /* Center the text */
+    }
+
+    .entrance-header h1 {
+        font-size: 3em; /* Adjust as needed */
+        margin: 0; /* Remove default margin */
+    }
+
+    .entrance-header p {
+        font-size: 1.5em; /* Adjust as needed */
+        margin: 10px 0; /* Add some spacing */
+    }
+
+    .entrance-buttons {
+        margin-top: 20px; /* Space above buttons */
+    }
+
+    .btn {
+        background-color: #007bff; /* Button color */
+        color: white; /* Text color */
+        padding: 10px 20px; /* Button padding */
+        border-radius: 5px; /* Rounded corners */
+        text-decoration: none; /* Remove underline */
+        margin: 0 10px; /* Space between buttons */
+        transition: background-color 0.3s; /* Transition effect */
+    }
+
+    .btn:hover {
+        background-color: #0056b3; /* Darker shade on hover */
+    }
+</style>

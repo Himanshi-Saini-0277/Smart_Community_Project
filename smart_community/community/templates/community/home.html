@@ -1,0 +1,24 @@
+{% extends 'community/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="home-container">
+    <div class="latest-posts">
+        <h2>Latest Posts</h2>
+        <ul>
+            {% for post in posts %}
+                <li>{{ post.title }} by {{ post.author }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="upcoming-events">
+        <h2>Upcoming Events</h2>
+        <ul>
+            {% for event in events %}
+                <li>{{ event.name }} on {{ event.date }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
