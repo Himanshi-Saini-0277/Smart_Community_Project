@@ -1,147 +1,84 @@
+/* General Styles */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f8f8;
-}
-
-header {
-    background-color: #4CAF50;
-    color: white;
-    padding: 15px;
-    text-align: center;
-}
-
-nav a {
-    margin: 0 15px;
-    color: white;
-    text-decoration: none;
-}
-
-footer {
-    text-align: center;
-    padding: 15px;
-    background-color: #4CAF50;
-    color: white;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
-}
-
-.home-container {
-    display: flex;
-    justify-content: space-between;
-    margin: 20px 0;
-}
-
-.latest-posts, .upcoming-events {
-    width: 48%;
-}
-
-.latest-posts h2, .upcoming-events h2 {
-    text-align: center;
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px;
-}
-
-.latest-posts ul, .upcoming-events ul {
-    list-style-type: none;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
     padding: 0;
 }
 
-.latest-posts li, .upcoming-events li {
-    background-color: #f8f8f8;
-    margin: 5px 0;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-.create-post-container {
+header {
     display: flex;
-    justify-content: space-between;
-    margin: 20px 0;
-}
-
-.left-column, .right-column {
-    width: 48%;
-}
-
-.left-column .form-group,
-.right-column .form-group {
-    margin-bottom: 20px;
-}
-
-.left-column .form-group label,
-.right-column .form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-button[type="submit"] {
-    display: block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button[type="submit"]:hover {
-    background-color: #45a049;
-}
-
-.create-post-container {
-    max-width: 800px;
-    margin: 0 auto;
+    align-items: center;
     padding: 20px;
+    background-color: #0f4c81;
+    border-bottom: 2px solid #ccc;
 }
 
-.post-heading {
-    text-align: center;
-    background-color: #4CAF50;
-    color: white;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 5px;
+.logo {
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
 }
 
-.form-row {
+.project-name {
+    font-size: 2em;
+    color: #fff;
+    animation: fadeIn 2s ease-in-out;
+}
+
+/* Features Section */
+.features {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    padding: 40px 0;
 }
 
-.form-group {
-    flex: 1;
-    margin: 0 10px;
+.feature-box {
+    width: 30%;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #fff;
+    overflow: hidden;
+    transition: transform 0.3s ease;
 }
 
-.form-group label {
-    font-weight: bold;
+.feature-box:hover {
+    transform: scale(1.05);
 }
 
-.submit-button {
-    display: block;
-    margin: 20px auto;
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+.feature-image {
+    width: 100%;
+    height: 150px;
+    background-size: cover;
+    background-position: center;
 }
 
-.submit-button:hover {
-    background-color: #45a049;
+.feature-description {
+    padding: 10px;
+    background-color: #f8f8f8;
+    font-size: 1em;
+    color: #333;
 }
 
-@media (max-width: 768px) {
-    .form-row {
-        flex-direction: column;
-    }
-    
-    .form-group {
-        margin: 10px 0;
-    }
+/* About Section */
+.about {
+    padding: 40px;
+    background-color: #eaeaea;
+    text-align: center;
+}
+
+.about-text {
+    font-size: 1.2em;
+    color: #555;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
