@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <title>Responsive Registration Form</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+        * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 10px;
+        position: relative;
+        background: linear-gradient(135deg, #71b7e6, #9b59b6);
+        overflow: hidden;
+        }
+
+        body::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: url("register-bg.jpg") no-repeat center center/cover;
+        filter: blur(2px);
+        z-index: -1;
+        }
+
+        .container {
+        position: relative;
+        max-width: 700px;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        z-index: 1;
+        }
+
+        .container .title {
+        font-size: 26px;
+        font-weight: 800;
+        color: #000000;
+        text-align: center;
+        margin-bottom: 20px;
+        }
+
+        .container form .user-details {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        }
+
+        form .user-details .input-box {
+        margin-bottom: 15px;
+        width: calc(100% / 2 - 20px);
+        }
+
+        form .input-box span.details {
+        display: block;
+        font-weight: 500;
+        margin-bottom: 5px;
+        color: #000000; /* Changed from white to black */
+        }
+
+        .user-details .input-box input {
+        height: 45px;
+        width: 100%;
+        outline: none;
+        border-radius: 5px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        background: rgba(255, 255, 255, 0.1);
+        padding-left: 15px;
+        font-size: 16px;
+        color: #000000; /* Changed from white to black */
+        transition: all 0.3s ease;
+        }
+
+        /* Placeholder text color */
+        .user-details .input-box input::placeholder {
+        color: #ccc;
+        opacity: 1;
+        }
+
+        .user-details .input-box input:focus,
+        .user-details .input-box input:valid {
+        border-color: #000000; /* Changed from white to black */
+        }
+
+        form .button {
+        height: 50px;
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        }
+
+        form .button input {
+        width: 100%;
+        height: 100%;
+        border: none;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.1);
+        color: #000000; /* Changed from white to black */
+        font-size: 18px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+        display: block;
+        align-items: left;
+        padding: 5px;
+        }
+
+        .logo img {
+        width: 150px;
+        height: px;
+        margin-bottom: 200px;
+        margin-right: 200px;
+        margin-left: -300px;
+        margin-top: -300px;
+        }
+
+        .login {
+        text-align: center;
+        margin-top: 30px;
+        color: #fff;
+        }
+
+        .login a {
+        color: #ffffff;
+        text-decoration: none;
+        }
+
+        form .button input:hover {
+        background: rgba(255, 255, 255, 0.2);
+        }
+
+        @media(max-width: 584px) {
+        .container {
+            max-width: 100%;
+        }
+
+        form .user-details .input-box {
+            margin-bottom: 15px;
+            width: 100%;
+        }
+
+        form .category {
+            width: 100%;
+        }
+
+        .content form .user-details {
+            max-height: 300px;
+            overflow-y: scroll;
+        }
+
+        .user-details::-webkit-scrollbar {
+            width: 5px;
+        }
+        }
+
+        @media(max-width: 459px) {
+        .container .content .category {
+            flex-direction: column;
+        }
+        }
+    </style>
+  </head>
+  <body>
+    <div class="logo">
+      <img src="logo.png" alt="Community Logo">
+    </div>
+    <div class="container">
+      <div class="title">Registration</div>
+      <form action="#">
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">Full Name</span>
+            <input type="text" placeholder="Enter your name" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Username</span>
+            <input type="text" placeholder="Enter your username" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Email</span>
+            <input type="text" placeholder="Enter your email" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Phone Number</span>
+            <input type="text" placeholder="Enter your number" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Password</span>
+            <input type="password" placeholder="Enter your password" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Confirm Password</span>
+            <input type="password" placeholder="Confirm your password" required>
+          </div>
+        </div>
+        <div class="button">
+          <input type="submit" value="Register">
+        </div>
+        <div class="login">
+            <p>Already have an account? <a href="login.html">Login</a></p>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
