@@ -5,50 +5,79 @@ from .models import Post, Event
 from .forms import PostForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
-from .forms import SignUpForm
+import subprocess
+from django.http import JsonResponse
+import json
+import os
+from django.shortcuts import render
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+import sys
 
 def home(request):
     posts = Post.objects.all()
     events = Event.objects.all()
     return render(request, 'community/home.html', {'posts': posts, 'events': events})
 
-@login_required
-def profile(request):
-    if isinstance(request.user, AnonymousUser):
-        return redirect('login')
-        
-    user_posts = Post.objects.filter(author=request.user)
-    return render(request, 'community/profile.html', {'user_posts': user_posts})
-
-def event_detail(request, pk):
-    event = get_object_or_404(Event, pk=pk)
-    return render(request, 'community/event_detail.html', {'event': event})
+def post_update(request):
+    return render(request, 'community/post_update.html')
 
 def create_post(request):
-    if request.method == 'POST':
-        form = PostForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.save()
-            return redirect('home')
-    else:
-        form = PostForm()
-    return render(request, 'community/create_post.html', {'form': form})
-
-def signup(request):
-    if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=password)
-            login(request, user)
-            return redirect('home')
-    else:
-        form = SignUpForm()
-    return render(request, 'community/signup.html', {'form': form})
+    return render(request, 'community/create_post.html')
 
 def entrance_view(request):
     return render(request, 'community/entrance.html')
+
+def register(request):
+    return render(request, 'community/register.html')
+
+def login(request):
+    return render(request, 'community/login.html')
+
+def collect_data(request):
+    if request.method == 'POST':
+        try:
+            # Get the house number from the request body
+            data = json.loads(request.body)
+            house_number = data.get('house_number')
+
+            if not house_number:
+                return JsonResponse({'success': False, 'error': 'House number not provided'})
+
+            # Run the collect_data.py script with the house number
+            subprocess.run(["python3", "path/to/collect_data.py", house_number], check=True)
+
+            return JsonResponse({'success': True})
+        except Exception as e:
+            return JsonResponse({'success': False, 'error': str(e)})
+
+    return JsonResponse({'success': False, 'error': 'Invalid request'})
+
+@csrf_exempt  # If using POST, make sure CSRF tokens are handled correctly
+
+def capture_image(request):
+    if request.method == 'POST':
+        house_number = request.POST.get('house_number')
+
+        if house_number:
+            try:
+                print("Python executable:", sys.executable)
+                script_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'collect_data.py')
+                result = subprocess.run(
+                    [sys.executable, script_path, house_number],
+                    check=True,
+                    text=True,
+                    capture_output=True
+                )
+
+                # Print output and error for debugging
+                print("STDOUT:", result.stdout)  # Standard output from the script
+                print("STDERR:", result.stderr)  # Standard error output
+
+                return render(request, 'community/success.html', {'house_number': house_number})
+            except subprocess.CalledProcessError as e:
+                print("Error occurred while executing the script:", e)  # Log error information
+                print("Error Output:", e.stderr)  # Print specific error messages
+                return render(request, 'community/error.html', {'error': 'Failed to collect data: ' + str(e)})
+
+    return render(request, 'community/create_post.html')

@@ -1,0 +1,28 @@
+{% extends 'community/base.html' %}
+
+{% block title %}Create Post{% endblock %}
+
+{% block content %}
+<div class="create-post-container">
+    
+    <form method="POST" action="{% url 'capture_image' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- First Row: Centered Heading -->
+        <div><h2 class="post-heading text-center">Create a New Post</h2></div>
+        
+        <!-- Form for entering house number -->
+        <div class="form-row text-center">
+            <div class="form-group">
+                <label for="house_number">Enter House Number:</label>
+                <input type="text" id="house_number" name="house_number" class="form-control" required>
+            </div>
+        </div>
+
+        <!-- Button to capture image -->
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Capture Image</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
