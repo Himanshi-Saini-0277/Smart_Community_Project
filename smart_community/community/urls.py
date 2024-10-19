@@ -3,10 +3,11 @@ from . import views
 from .views import entrance_view
 
 urlpatterns = [
-    path('', views.home, name='home'),
-    path('entrance/', entrance_view, name='entrance'),
-    path('profile/', views.profile, name='profile'),
+    path('home/', views.home, name='home'),
+    path('', entrance_view, name='entrance'),
     path('event/<int:pk>/', views.event_detail, name='event_detail'),
     path('create_post/', views.create_post, name='create_post'),
-    path('signup/', views.signup, name='signup'),
+    path('register/', views.register, name='register'),
+    path('login/', views.login, name='login'),
+    path('post_update/', views.post_update, name='post_update'),
 ]
