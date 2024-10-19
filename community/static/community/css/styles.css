@@ -1,0 +1,147 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+}
+
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+nav a {
+    margin: 0 15px;
+    color: white;
+    text-decoration: none;
+}
+
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #4CAF50;
+    color: white;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+.home-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.latest-posts, .upcoming-events {
+    width: 48%;
+}
+
+.latest-posts h2, .upcoming-events h2 {
+    text-align: center;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+}
+
+.latest-posts ul, .upcoming-events ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.latest-posts li, .upcoming-events li {
+    background-color: #f8f8f8;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.create-post-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.left-column, .right-column {
+    width: 48%;
+}
+
+.left-column .form-group,
+.right-column .form-group {
+    margin-bottom: 20px;
+}
+
+.left-column .form-group label,
+.right-column .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+button[type="submit"] {
+    display: block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.create-post-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.post-heading {
+    text-align: center;
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-group {
+    flex: 1;
+    margin: 0 10px;
+}
+
+.form-group label {
+    font-weight: bold;
+}
+
+.submit-button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: #45a049;
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+    }
+    
+    .form-group {
+        margin: 10px 0;
+    }
+}
