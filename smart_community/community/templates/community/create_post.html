@@ -170,9 +170,21 @@
 
 <body>
     <!-- Header with Logo -->
-    <header>
+    <header style="display: flex; justify-content: space-between; align-items: center; position: relative;">
         <img src="{% static 'logo.png' %}" alt="Logo">
-        Create a New Post
+    
+        <span style="position: absolute; left: 50%; transform: translateX(-50%);">Create Post</span>
+    
+        <a style="text-decoration: none;
+        background-color: #7e57c2;
+        color: white;
+        padding: 15px 30px;
+        border-radius: 8px;
+        font-size: 18px;
+        font-weight: 500;
+        transition: all 0.4s ease;
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+        margin-left: auto;" href="{% url 'home' %}">Home</a>
     </header>
 
     <div class="sidebar-left"></div>

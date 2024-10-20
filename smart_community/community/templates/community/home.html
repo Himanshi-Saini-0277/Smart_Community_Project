@@ -96,7 +96,7 @@
             font-size: 18px;
             font-weight: 500;
             transition: all 0.4s ease;
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
         }
 
         .button-container a:hover {
@@ -114,7 +114,7 @@
             font-size: 18px;
             font-weight: 500;
             transition: all 0.4s ease;
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
         }
 
         .but-container a:hover {
@@ -123,14 +123,13 @@
             box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
         }
 
-
         .post-card {
             background-color: white;
             box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
             padding: 30px;
-            border-radius: 10px;
+            border-radius: 20px;
             margin-bottom: 30px;
-            transition: all 0.3s ease;
+            transition: all 0.1s ease;
             position: relative;
         }
 
@@ -203,7 +202,7 @@
 
         .sidebar-left {
             position: fixed;
-            top: 100px;
+            top: 120px;
             left: 0;
             height: 80%;
             width: 50px;
@@ -215,7 +214,7 @@
 
         .sidebar-right {
             position: fixed;
-            top: 100px;
+            top: 120px;
             right: 0;
             height: 80%;
             width: 50px;
@@ -226,17 +225,27 @@
         }
 
         .columns-container {
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 20px; 
-            margin-top: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
         }
 
         .column {
             background-color: #fff;
-            padding: 20px; 
+            padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* New styles for images */
+        .post-image {
+            width: 350px; /* Adjust size as needed */
+            height: 180px ;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            display: block; 
+            margin-left: auto; /* Center image */
+            margin-right: auto; /* Center image */
         }
 
     </style>
@@ -262,8 +271,8 @@
     <div class="container">
         <!-- Action Buttons -->
         <div class="but-container">
-            <a>Latest Posts</a>
             <a>Upcoming Events</a>
+            <a>Latest Posts</a>
         </div>
 
         <table style="width: 100%; border-collapse: collapse; margin-top: -20px;">
@@ -272,9 +281,31 @@
                     <div class="post-container">
                         <!-- Your post cards for latest posts -->
                         <div class="post-card">
-                            <h3>Kartik Kapoor</h3>
-                            <p>🌳 Let's plant more trees in our community! Every small effort counts! 🌱</p>
-                            <div class="post-actions">
+                            <img src="{% static 'bhandara.jpg' %}" alt="Bhandara Event" class="post-image">
+                            <h3>Bhandara</h3>
+                            <p>🌟 Bhandara Invitation 🌟
+                                <br>
+                            </br>
+                            You are cordially invited to attend the Bhandara event!
+                                <br>
+                            </br>    
+                                📅 Date: 28/10/2024
+                                <br>
+                            </br>
+                                📍 Venue: Holy Chowk, Mullana
+                                <br>
+                            </br>
+                                ⏰ Time: 12:00 AM
+                                <br>
+                            </br>
+                                Join us as we gather to seek the blessings of God. 
+                                <b>Everyone is welcome!</b>
+
+                                <br>
+
+                            </p>
+                
+                        <div class="post-actions">
                                 <button class="like-button" onclick="likePost(this)">Like</button>
                                 <span class="like-count">0</span>
                                 <button onclick="toggleComments(this)">Comment</button>
@@ -282,15 +313,16 @@
                             <div class="comment-section" style="display: none;">
                                 <h4>Comments:</h4>
                                 <div class="comment">
-                                    <strong>User1:</strong> This is so important! 🌍
+                                    <strong>Parveen:</strong> Can't wait! 😋
                                 </div>
-                                <textarea class="comment-input" placeholder="Write a comment..."></textarea>
+                                <textarea class="comment-input" placeholder="Add a comment..."></textarea>
                             </div>
                         </div>
                 
                         <div class="post-card">
-                            <h3>Shanaya Oberoi </h3>
-                            <p>🏫 Join us for a community cleanup this Saturday! Everyone is welcome! 🗑️ Clean India , Green India </p>
+                            <img src="{% static 'temple.jpeg' %}" alt="Special Pooja" class="post-image">
+                            <h3>Special Pooja in Temple</h3>
+                            <p>🙏 Join us for a special Pooja at the temple this Sunday! 🌸</p>
                             <div class="post-actions">
                                 <button class="like-button" onclick="likePost(this)">Like</button>
                                 <span class="like-count">0</span>
@@ -299,54 +331,76 @@
                             <div class="comment-section" style="display: none;">
                                 <h4>Comments:</h4>
                                 <div class="comment">
-                                    <strong>User2:</strong> Count me in! 🎉
+                                    <strong>Neelam:</strong> Looking forward to it! 🕉️
                                 </div>
-                                <textarea class="comment-input" placeholder="Write a comment..."></textarea>
+                                <textarea class="comment-input" placeholder="Add a comment..."></textarea>
                             </div>
                         </div>
-                
-                        <div class="post-card">
-                            <h3>Karan Singh</h3>
-                            <p>📅 Don't forget our monthly community meeting next week! Let's make our voices heard! 📣 Be on time. Punctuality is the Key to Success.</p>
-                            <div class="post-actions">
-                                <button class="like-button" onclick="likePost(this)">Like</button>
-                                <span class="like-count">0</span>
-                                <button onclick="toggleComments(this)">Comment</button>
-                            </div>
-                            <div class="comment-section" style="display: none;">
-                                <h4>Comments:</h4>
-                                <div class="comment">
-                                    <strong>User3:</strong> I will be there! 🙌
-                                </div>
-                                <textarea class="comment-input" placeholder="Write a comment..."></textarea>
-                            </div>
-                        </div>
-                
-                        <div class="post-card">
-                            <h3>Radha Yadav</h3>
-                            <p>🌍 Let's work together to make our community more sustainable! What are your ideas? Its time to do focus on our environment. Lets do something Big.💡</p>
-                            <div class="post-actions">
-                                <button class="like-button" onclick="likePost(this)">Like</button>
-                                <span class="like-count">0</span>
-                                <button onclick="toggleComments(this)">Comment</button>
-                            </div>
-                            <div class="comment-section" style="display: none;">
-                                <h4>Comments:</h4>
-                                <div class="comment">
-                                    <strong>User4:</strong> Great idea! Let's brainstorm! 🤝
-                                </div>
-                                <textarea class="comment-input" placeholder="Write a comment..."></textarea>
-                            </div>
-                        </div>
+
                     </div>
                 </td>
-        
+
                 <td style="vertical-align: top; padding: 10px;">
                     <div class="post-container">
+                
+                        <div class="post-card">
+                            <h3>Karan Singh : </h3>
+                            <p>Join us for a community clean-up day this Saturday! Let's make our neighborhood beautiful! 🧹 </p>
+                            <b>Clean India, Green India !</b>
+                            <div class="post-actions">
+                                <button class="like-button" onclick="likePost(this)">Like</button>
+                                <span class="like-count">0</span>
+                                <button onclick="toggleComments(this)">Comment</button>
+                            </div>
+                            <div class="comment-section" style="display: none;">
+                                <h4>Comments:</h4>
+                                <div class="comment">
+                                    <strong>Prachi :</strong> I'm in! 💪
+                                </div>
+                                <textarea class="comment-input" placeholder="Add a comment..."></textarea>
+                            </div>
+                        </div>
+                    
+                        <div class="post-card">
+                            <h3>Kabir : </h3>
+                            <p>Hey Everyone! 🎉<br><br>
+                                I am very happy to share that I have successfully been placed in my dream company, Google! 🚀</p>
+                                                            <div class="post-actions">
+                                <button class="like-button" onclick="likePost(this)">Like</button>
+                                <span class="like-count">0</span>
+                                <button onclick="toggleComments(this)">Comment</button>
+                            </div>
+                            <div class="comment-section" style="display: none;">
+                                <h4>Comments:</h4>
+                                <div class="comment">
+                                    <strong>Shikhar :</strong> You Deserved it ! 💪
+                                </div>
+                                <textarea class="comment-input" placeholder="Add a comment..."></textarea>
+                            </div>
+                        </div>
+                
+                        <div class="post-card">
+                            <h3>Sunita :</h3>
+                            <p><p>🌟 Exciting News! 🎉 I have opened a new tuition class for students from 9th to 11th grade! 📚✨ For inquiries, please contact me at 📞 9834568358.</p>
+                        </p>
+                            <div class="post-actions">
+                                <button class="like-button" onclick="likePost(this)">Like</button>
+                                <span class="like-count">0</span>
+                                <button onclick="toggleComments(this)">Comment</button>
+                            </div>
+                            <div class="comment-section" style="display: none;">
+                                <h4>Comments:</h4>
+                                <div class="comment">
+                                    <strong>Nihaar:</strong> Congratulations!
+                                </div>
+                                <textarea class="comment-input" placeholder="Add a comment..."></textarea>
+                            </div>
+                        </div>
                         <!-- Your post cards for upcoming events -->
                         <div class="post-card">
-                            <h3>Kartik Kapoor</h3>
-                            <p>🌳 Let's plant more trees in our community! Every small effort counts! 🌱</p>
+                            <h3>Vanshika :</h3>
+                            <p><p>📚📖 Exciting Announcement! 🌟 We are starting a Book Club! Join us for our first meeting on November 1st, 2024, at 5 PM in the library. Let's dive into some great reads together! 📅✨</p>
+                        </p>
                             <div class="post-actions">
                                 <button class="like-button" onclick="likePost(this)">Like</button>
                                 <span class="like-count">0</span>
@@ -355,15 +409,16 @@
                             <div class="comment-section" style="display: none;">
                                 <h4>Comments:</h4>
                                 <div class="comment">
-                                    <strong>User1:</strong> This is so important! 🌍
+                                    <strong>Swapnil :</strong> I will definitely join ! 💪
                                 </div>
-                                <textarea class="comment-input" placeholder="Write a comment..."></textarea>
+                                <textarea class="comment-input" placeholder="Add a comment..."></textarea>
                             </div>
                         </div>
                 
                         <div class="post-card">
-                            <h3>Shanaya Oberoi </h3>
-                            <p>🏫 Join us for a community cleanup this Saturday! Everyone is welcome! 🗑️ Clean India , Green India </p>
+                            
+                            <h3>Anish :</h3>
+                            <p>Bring your favorite dish to share! Let's enjoy food and community together! 🍲</p>
                             <div class="post-actions">
                                 <button class="like-button" onclick="likePost(this)">Like</button>
                                 <span class="like-count">0</span>
@@ -372,57 +427,21 @@
                             <div class="comment-section" style="display: none;">
                                 <h4>Comments:</h4>
                                 <div class="comment">
-                                    <strong>User2:</strong> Count me in! 🎉
+                                    <strong>Jaskiraat:</strong> Can't wait! 🍽️
                                 </div>
-                                <textarea class="comment-input" placeholder="Write a comment..."></textarea>
-                            </div>
-                        </div>
-                
-                        <div class="post-card">
-                            <h3>Karan Singh</h3>
-                            <p>📅 Don't forget our monthly community meeting next week! Let's make our voices heard! 📣 Be on time. Punctuality is the Key to Success.</p>
-                            <div class="post-actions">
-                                <button class="like-button" onclick="likePost(this)">Like</button>
-                                <span class="like-count">0</span>
-                                <button onclick="toggleComments(this)">Comment</button>
-                            </div>
-                            <div class="comment-section" style="display: none;">
-                                <h4>Comments:</h4>
-                                <div class="comment">
-                                    <strong>User3:</strong> I will be there! 🙌
-                                </div>
-                                <textarea class="comment-input" placeholder="Write a comment..."></textarea>
-                            </div>
-                        </div>
-                
-                        <div class="post-card">
-                            <h3>Radha Yadav</h3>
-                            <p>🌍 Let's work together to make our community more sustainable! What are your ideas? Its time to do focus on our environment. Lets do something Big.💡</p>
-                            <div class="post-actions">
-                                <button class="like-button" onclick="likePost(this)">Like</button>
-                                <span class="like-count">0</span>
-                                <button onclick="toggleComments(this)">Comment</button>
-                            </div>
-                            <div class="comment-section" style="display: none;">
-                                <h4>Comments:</h4>
-                                <div class="comment">
-                                    <strong>User4:</strong> Great idea! Let's brainstorm! 🤝
-                                </div>
-                                <textarea class="comment-input" placeholder="Write a comment..."></textarea>
+                                <textarea class="comment-input" placeholder="Add a comment..."></textarea>
                             </div>
                         </div>
                     </div>
                 </td>
             </tr>
         </table>
-
+    </div>
         </div>
     <script>
         function likePost(button) {
-            const likeCountSpan = button.nextElementSibling;
-            let likeCount = parseInt(likeCountSpan.innerText);
-            likeCount++;
-            likeCountSpan.innerText = likeCount;
+            const likeCount = button.nextElementSibling;
+            likeCount.innerText = parseInt(likeCount.innerText) + 1;
         }
 
         function toggleComments(button) {
