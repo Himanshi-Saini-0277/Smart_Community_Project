@@ -1,38 +1,25 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, redirect
 
 # Create your views here.
 from .models import Post, Event
 from .forms import PostForm
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import login, authenticate
-from .forms import SignUpForm
-
-import requests
-
-GOOGLE_MAPS_API_KEY = "11a6be456a3eee97abd551370de2eb3a"
-
-def get_city_from_coords(latitude, longitude):
-    geocode_url = f"https://api.ipstack.com/maps/api/geocode/json?latlng={latitude},{longitude}&key={GOOGLE_MAPS_API_KEY}"
-    response = requests.get(geocode_url).json()
-    
-    city = None
-    for result in response.get("results", []):
-        for component in result.get("address_components", []):
-            if "locality" in component["types"]:
-                city = component["long_name"]
-                break
-        if city:
-            break
-
-    return city
+from django.contrib.auth import authenticate
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login as auth_login
+from django.contrib import messages
+from .models import UserProfile
+from django.db import models
 
 def home(request):
-    posts = Post.objects.all()
-    events = Event.objects.all()
-    return render(request, 'community/home.html', {'posts': posts, 'events': events})
+    if request.user.is_authenticated:
+        user_profile = UserProfile.objects.get(user=request.user)
+        posts = Post.objects.filter(models.Q(user__postal_code=user_profile.postal_code) | models.Q(user__area_name=user_profile.area_name))
+        events = Event.objects.filter(models.Q(user__postal_code=user_profile.postal_code) | models.Q(user__area_name=user_profile.area_name))
+    else:
+        posts = Post.objects.none()
+        events = Event.objects.none()
 
-def event_detail(request, pk):
-    return render(request, 'community/event_detail.html', {'event': event})
+    return render(request, 'community/home.html', {'posts': posts, 'events': events})
 
 def create_post(request):
     if request.method == 'POST':
@@ -49,16 +36,13 @@ def create_post(request):
 def entrance_view(request):
     return render(request, 'community/entrance.html')
 
-from .models import CustomUser
-from django.contrib.auth import login
-from django.shortcuts import render, redirect
-from django.contrib import messages
-
 def register(request):
     if request.method == "POST":
         full_name = request.POST["full_name"]
         username = request.POST["username"]
         email = request.POST["email"]
+        postal_code = request.POST['postal_code']
+        area_name = request.POST['area_name']
         password1 = request.POST["password"]
         password2 = request.POST["confirm_password"]
 
@@ -80,11 +64,6 @@ def register(request):
         return redirect('/register')
 
     return render(request, 'community/register.html')
-
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login as auth_login
-from django.contrib import messages
-from .models import CustomUser
 
 def login(request):
     if request.method == 'POST':

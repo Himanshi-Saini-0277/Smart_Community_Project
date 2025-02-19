@@ -243,8 +243,16 @@
             <input type="text" name="phone" placeholder="Enter your number" required>
           </div>
           <div class="input-box">
+            <span class="details">Post Office Name</span>
+            <input type="text" name="town" placeholder="Enter your postal city name" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Post Office Pincode</span>
+            <input type="text" name="pincode" placeholder="Enter your postal pincode" required>
+          </div>
+          <div class="input-box">
             <span class="details">Password</span>
-            <input type="password" name="password" placeholder="Enter your password" required>
+            <input type="password" name="password" placeholder="Enter your Password" required>
           </div>
           <div class="input-box">
             <span class="details">Confirm Password</span>
@@ -261,55 +269,35 @@
     </div>
   </div>
 
-    <script>
-      const apiKey = "11a6be456a3eee97abd551370de2eb3a"; // Replace with your actual API key
+  <script>
+    document.getElementById("myForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        let email = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
+        let warning = document.getElementById("warning");
 
-      fetch(`https://api.ipstack.com/check?access_key=${apiKey}`)
-        .then(response => response.json())
-        .then(data => {
-            if (data.city && data.country_name) {
-                let city = data.city;
-                let country = data.country_name;
-                let latitude = data.latitude;
-                let longitude = data.longitude;
+        if (email === "" || password === "") {
+            warning.style.display = "block";
+            warning.innerText = "Email and Password cannot be empty";
+            return;
+        }
 
-                console.log(`City: ${city}, Country: ${country}, Lat: ${latitude}, Lon: ${longitude}`);
+        if (!email.includes("@") || !email.includes(".")) {
+            warning.style.display = "block";
+            warning.innerText = "Invalid email format";
+            return;
+        }
 
-document.getElementById('registration-form').addEventListener('submit', function(event) {
-  event.preventDefault(); 
+        if (password.length < 6) {
+            warning.style.display = "block";
+            warning.innerText = "Password must be at least 6 characters";
+            return;
+        }
 
-  let registrationData = new FormData(event.target);
-  
-  fetch('/register/', {
-      method: 'POST',
-      body: registrationData,
-  })
-  .then(response => response.json())
-  .then(data => {
-      if (data.success) {
-          alert("Registration successful!");
-          fetch('https://api.ipstack.com?apiKey=11a6be456a3eee97abd551370de2eb3a')
-              .then(response => response.json())
-              .then(locationData => {
-                  if (locationData) {
-                      console.log("Location retrieved:", locationData);
-                  } else {
-                      alert("Could not retrieve location. Try again.");
-                  }
-              })
-              .catch(error => {
-                  console.error("Error fetching location:", error);
-                  alert("Could not retrieve location. Try again.");
-              });
-      } else {
-          alert("Registration failed. Please try again.");
-      }
-  })
-  .catch(error => {
-      console.error("Error during registration:", error);
-      alert("Something went wrong. Please try again.");
-  });
-});
-    </script>   
+        warning.style.display = "none";
+        alert("Form submitted successfully!");
+    });
+</script>
+
   </body>
 </html>
