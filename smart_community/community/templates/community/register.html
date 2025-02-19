@@ -4,19 +4,19 @@
     {% load static %}
     <meta charset="UTF-8">
     <title>Responsive Registration Form</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{% static 'community\css\styles.css' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
-        * {
+      * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
         font-family: 'Poppins', sans-serif;
-        }
+      }
 
-        body {
+      body {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -25,9 +25,9 @@
         position: relative;
         background: linear-gradient(135deg, #71b7e6, #9b59b6);
         overflow: hidden;
-        }
+      }
 
-        body::before {
+      body::before {
         content: "";
         position: absolute;
         width: 100%;
@@ -35,9 +35,9 @@
         background: url("{% static 'register-bg.jpg' %}") no-repeat center center/cover;
         filter: blur(2px);
         z-index: -1;
-        }
+      }
 
-        .container {
+      .container {
         position: relative;
         max-width: 700px;
         width: 100%;
@@ -48,36 +48,36 @@
         backdrop-filter: blur(15px);
         border: 1px solid rgba(255, 255, 255, 0.5);
         z-index: 1;
-        }
+      }
 
-        .container .title {
+      .container .title {
         font-size: 26px;
         font-weight: 800;
         color: #000000;
         text-align: center;
         margin-bottom: 20px;
-        }
+      }
 
-        .container form .user-details {
+      .container form .user-details {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
         margin-bottom: 20px;
-        }
+      }
 
-        form .user-details .input-box {
+      form .user-details .input-box {
         margin-bottom: 15px;
         width: calc(100% / 2 - 20px);
-        }
+      }
 
-        form .input-box span.details {
+      form .input-box span.details {
         display: block;
         font-weight: 500;
         margin-bottom: 5px;
-        color: #000000; /* Changed from white to black */
-        }
+        color: #000000;
+      }
 
-        .user-details .input-box input {
+      .user-details .input-box input {
         height: 45px;
         width: 100%;
         outline: none;
@@ -86,35 +86,34 @@
         background: rgba(255, 255, 255, 0.1);
         padding-left: 15px;
         font-size: 16px;
-        color: #000000; /* Changed from white to black */
+        color: #000000;
         transition: all 0.3s ease;
-        }
+      }
 
-        /* Placeholder text color */
-        .user-details .input-box input::placeholder {
+      .user-details .input-box input::placeholder {
         color: #ccc;
         opacity: 1;
-        }
+      }
 
-        .user-details .input-box input:focus,
-        .user-details .input-box input:valid {
-        border-color: #000000; /* Changed from white to black */
-        }
+      .user-details .input-box input:focus,
+      .user-details .input-box input:valid {
+        border-color: #000000;
+      }
 
-        form .button {
+      form .button {
         height: 50px;
         margin-top: 20px;
         display: flex;
         justify-content: center;
-        }
+      }
 
-        form .button input {
+      form .button input {
         width: 100%;
         height: 100%;
         border: none;
         border-radius: 10px;
         background: rgba(255, 255, 255, 0.1);
-        color: #000000; /* Changed from white to black */
+        color: #000000;
         font-size: 18px;
         font-weight: 500;
         cursor: pointer;
@@ -122,38 +121,38 @@
         backdrop-filter: blur(5px);
         border: 1px solid rgba(255, 255, 255, 0.3);
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
+      }
 
-        .logo {
+      .logo {
         display: block;
         align-items: left;
         padding: 5px;
-        }
+      }
 
-        .logo img {
+      .logo img {
         width: 120px;
-        height: px;
+        height: auto;
         margin-bottom: 550px;
         margin-right: 300px;
         margin-left: -300px;
-        }
+      }
 
-        .login {
+      .login {
         text-align: center;
         margin-top: 30px;
         color: #fff;
-        }
+      }
 
-        .login a {
+      .login a {
         color: #ffffff;
         text-decoration: none;
-        }
+      }
 
-        form .button input:hover {
+      form .button input:hover {
         background: rgba(255, 255, 255, 0.2);
-        }
+      }
 
-        @media(max-width: 584px) {
+      @media(max-width: 584px) {
         .container {
             max-width: 100%;
         }
@@ -175,55 +174,142 @@
         .user-details::-webkit-scrollbar {
             width: 5px;
         }
-        }
+      }
 
-        @media(max-width: 459px) {
+      @media(max-width: 459px) {
         .container .content .category {
             flex-direction: column;
         }
-        }
+      }
     </style>
   </head>
   <body>
     <div class="logo">
       <img src="{% static 'logo.png' %}" alt="Community Logo">
     </div>
-    <div class="container">
+    <div id="message-box" style="text-align:center; font-size:15px; position:fixed; top:10px; left:50%; transform:translateX(-50%); background-color:white; padding:10px 20px; border-radius:5px; box-shadow:0px 0px 10px rgba(0,0,0,0.2); display:none; width:300px; height:auto; max-width:80%;">
+      {% if messages %}
+          {% for message in messages %}
+              <p style="color: {% if message.tags == 'error' %}red{% else %}green{% endif %}; margin:0; padding-right:30px;">
+                  {{ message }}
+              </p>
+          {% endfor %}
+          <button onclick="closeMessage()" style="position:absolute; top:10px; right:10px; padding:5px 10px; font-size:10px; background-color:#007BFF; color:white; border:none; border-radius:3px; cursor:pointer;">
+              OK
+          </button>
+      {% endif %}
+  </div>
+  
+  <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          var messageBox = document.getElementById("message-box");
+          if (messageBox.innerText.trim() !== "") {
+              messageBox.style.display = "block";
+              setTimeout(function() {
+                  messageBox.style.opacity = "0";
+                  setTimeout(function() {
+                      messageBox.style.display = "none";
+                  }, 500);
+              }, 5000);
+          }
+      });
+  
+      function closeMessage() {
+          var messageBox = document.getElementById("message-box");
+          messageBox.style.display = "none";
+      }
+  </script>
+  
+  
+    <div style="left:-4%;" class="container">
       <div class="title">Registration</div>
-      <form action="#">
+      <form method="POST" action="{% url 'register' %}">
+        {% csrf_token %}
         <div class="user-details">
           <div class="input-box">
             <span class="details">Full Name</span>
-            <input type="text" placeholder="Enter your name" required>
+            <input type="text" name="full_name" placeholder="Enter your name" required>
           </div>
           <div class="input-box">
             <span class="details">Username</span>
-            <input type="text" placeholder="Enter your username" required>
+            <input type="text" name="username" id="username" placeholder="Enter your username" required>
           </div>
           <div class="input-box">
             <span class="details">Email</span>
-            <input type="text" placeholder="Enter your email" required>
+            <input type="email" name="email" id="email" placeholder="Enter your email" required>
           </div>
           <div class="input-box">
             <span class="details">Phone Number</span>
-            <input type="text" placeholder="Enter your number" required>
+            <input type="text" name="phone" placeholder="Enter your number" required>
           </div>
           <div class="input-box">
             <span class="details">Password</span>
-            <input type="password" placeholder="Enter your password" required>
+            <input type="password" name="password" placeholder="Enter your password" required>
           </div>
           <div class="input-box">
             <span class="details">Confirm Password</span>
-            <input type="password" placeholder="Confirm your password" required>
+            <input type="password" name="confirm_password" placeholder="Confirm your password" required>
           </div>
         </div>
         <div class="button">
           <input type="submit" value="Register">
         </div>
         <div class="login">
-            <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+          <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
         </div>
       </form>
     </div>
+  </div>
+
+    <script>
+      const apiKey = "11a6be456a3eee97abd551370de2eb3a"; // Replace with your actual API key
+
+      fetch(`https://api.ipstack.com/check?access_key=${apiKey}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.city && data.country_name) {
+                let city = data.city;
+                let country = data.country_name;
+                let latitude = data.latitude;
+                let longitude = data.longitude;
+
+                console.log(`City: ${city}, Country: ${country}, Lat: ${latitude}, Lon: ${longitude}`);
+
+document.getElementById('registration-form').addEventListener('submit', function(event) {
+  event.preventDefault(); 
+
+  let registrationData = new FormData(event.target);
+  
+  fetch('/register/', {
+      method: 'POST',
+      body: registrationData,
+  })
+  .then(response => response.json())
+  .then(data => {
+      if (data.success) {
+          alert("Registration successful!");
+          fetch('https://api.ipstack.com?apiKey=11a6be456a3eee97abd551370de2eb3a')
+              .then(response => response.json())
+              .then(locationData => {
+                  if (locationData) {
+                      console.log("Location retrieved:", locationData);
+                  } else {
+                      alert("Could not retrieve location. Try again.");
+                  }
+              })
+              .catch(error => {
+                  console.error("Error fetching location:", error);
+                  alert("Could not retrieve location. Try again.");
+              });
+      } else {
+          alert("Registration failed. Please try again.");
+      }
+  })
+  .catch(error => {
+      console.error("Error during registration:", error);
+      alert("Something went wrong. Please try again.");
+  });
+});
+    </script>   
   </body>
 </html>
