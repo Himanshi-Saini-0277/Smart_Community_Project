@@ -2,3 +2,4 @@ venv
 db.sqlite3
 smart_community/__pycache__
 community/__pycache__
+media

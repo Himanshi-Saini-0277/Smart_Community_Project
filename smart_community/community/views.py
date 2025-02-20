@@ -1,21 +1,13 @@
 from django.shortcuts import render, redirect
-
-# Create your views here.
+from django.utils import timezone
 from .models import Post, Event
-from .forms import PostForm, SignUpForm
+from .forms import PostForm
 from django.contrib.auth import authenticate
-from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib import messages
-from .models import UserProfile
-from django.db import models
-from django.shortcuts import render, redirect
-from django.contrib import messages
-from .models import UserProfile
 from django.contrib.auth.models import User
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import authenticate
 from django.shortcuts import render, get_object_or_404
-from .models import Event 
 from django.shortcuts import render
 from django.db.models import Q
 from .models import UserProfile, Post, Event
@@ -41,13 +33,12 @@ def home(request):
             posts = Post.objects.filter(
                 user__in=matching_users
             ).select_related('user').order_by('-timestamp')
-            print(f"Posts: {posts}")
             
             # Get events from these users
             events = Event.objects.filter(
                 user__in=matching_users
             ).order_by('date')
-            print(f"Events: {events}")
+
         
         except UserProfile.DoesNotExist:
             print("UserProfile.DoesNotExist: No profile found for this user.")
@@ -66,16 +57,21 @@ def event_detail(request, pk):
     event = get_object_or_404(Event, pk=pk)
     return render(request, 'event_detail.html', {'event': event})
 def create_post(request):
-    if request.method == 'POST':
-        form = PostForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            title = request.POST.get('title')
+            content = request.POST.get('content')
+            image = request.FILES.get('image')  # Handle uploaded image
+            post =Post.objects.create(title=title, content=content, image=image,user=request.user)
             post.save()
-            return redirect('community/home.html')
+            return redirect('home')  # Re direct after successful post creation
+        else:
+            form = PostForm()
     else:
-        form = PostForm()
+        return redirect('login')
+
     return render(request, 'community/create_post.html', {'form': form})
+
 
 def entrance_view(request):
     return render(request, 'community/entrance.html')
@@ -163,3 +159,16 @@ def login(request):
 
 def post_update(request):
     return render(request, 'community/post_update.html')
+
+def create_event(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            title = request.POST.get('title')
+            content = request.POST.get('description')
+            image = request.FILES.get('image')  # Handle uploaded image
+            event_detail = Event.objects.create(name=title, description=content, image=image,user=request.user,date=timezone.now())
+            event_detail.save()
+    else:
+        return redirect('home')
+    
+    return render(request, 'community/create_event.html')

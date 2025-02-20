@@ -260,7 +260,7 @@
         </div>
         <div class="button-container">
             <a href="{% url 'create_post' %}">Create Post</a>
-            <a href="{% url 'post_update' %}">Post Events</a>
+            <a href="{% url 'create_event' %}">Post Events</a>
         </div>
     </header>
 
@@ -282,8 +282,9 @@
                         {% if events %}
             {% for event in events %}
             <div class="post-card">
-                {% if post.image %}
+                {% if event.image %}
                         <img src="{{ event.image.url }}" alt="Post Image" class="post-image">
+                        
                     {% endif %}
                 <h3>{{ event.title }}</h3>
                 <p>🌟 Bhandara Invitation 🌟

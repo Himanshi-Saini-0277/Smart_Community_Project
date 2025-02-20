@@ -5,7 +5,7 @@
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Post - Neighbourhood Assistance Hub</title>
+    <title>Create Event - Neighbourhood Assistance Hub</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         body {
@@ -173,7 +173,7 @@
     <header style="display: flex; justify-content: space-between; align-items: center; position: relative;">
         <img src="{% static 'logo.png' %}" alt="Logo">
     
-        <span style="position: absolute; left: 50%; transform: translateX(-50%);">Create Post</span>
+        <span style="position: absolute; left: 50%; transform: translateX(-50%);">Create Event</span>
     
         <a style="text-decoration: none;
         background-color: #7e57c2;
@@ -191,17 +191,17 @@
     <div class="sidebar-right"></div>
 
     <div class="container">
-        <form method="POST" enctype="multipart/form-data" action="{% url 'create_post' %}">
+        <form method="POST" enctype="multipart/form-data" action="{% url 'create_event' %}">
 
             {% csrf_token %}
             <div class="input-field">
-                <label for="id_title">Post Title</label>
+                <label for="id_title">Event Title</label>
                 <input type="text" name="title" id="id_title" placeholder="Enter title here..." required>
             </div>
             
             <div class="input-field">
-                <label for="id_content">Post Content</label>
-                <textarea name="content" id="id_content" placeholder="Write your post here..." required></textarea>
+                <label for="id_content">Event Description</label>
+                <textarea name="description" id="id_content" placeholder="Write your description here..." required></textarea>
             </div>
             
             <div class="upload-photo">
@@ -209,10 +209,10 @@
                 <input type="file" name="image" id="id_image" accept="image/*">
             </div>
             
-            <button type="submit" class="submit-button">Submit Post</button>
+            <button type="submit" class="submit-button">Submit Event</button>
         </form>
 
-        <div class="success-message" id="successMessage">Post submitted successfully!</div>
+        <div class="success-message" id="successMessage">Event submitted successfully!</div>
     </div>
 
 </body>
