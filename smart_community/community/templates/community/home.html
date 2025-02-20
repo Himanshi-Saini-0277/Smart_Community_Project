@@ -279,159 +279,81 @@
             <tr>
                 <td style="vertical-align: top; padding: 10px;">
                     <div class="post-container">
-                        <!-- Your post cards for latest posts -->
-                        <div class="post-card">
-                            <img src="{% static 'bhandara.jpg' %}" alt="Bhandara Event" class="post-image">
-                            <h3>Bhandara</h3>
-                            <p>🌟 Bhandara Invitation 🌟
-                                <br>
-                            </br>
-                            You are cordially invited to attend the Bhandara event!
-                                <br>
-                            </br>    
-                                📅 Date: 28/10/2024
-                                <br>
-                            </br>
-                                📍 Venue: Holy Chowk, Mullana
-                                <br>
-                            </br>
-                                ⏰ Time: 12:00 AM
-                                <br>
-                            </br>
-                                Join us as we gather to seek the blessings of God. 
-                                <b>Everyone is welcome!</b>
-
-                                <br>
-
-                            </p>
+                        {% if events %}
+            {% for event in events %}
+            <div class="post-card">
+                {% if post.image %}
+                        <img src="{{ event.image.url }}" alt="Post Image" class="post-image">
+                    {% endif %}
+                <h3>{{ event.title }}</h3>
+                <p>🌟 Bhandara Invitation 🌟
+                    <br>
+                </br>
+                You are cordially invited to attend the Bhandara event!
+                    <br>
+                </br>    
                 
-                        <div class="post-actions">
-                                <button class="like-button" onclick="likePost(this)">Like</button>
-                                <span class="like-count">0</span>
-                                <button onclick="toggleComments(this)">Comment</button>
-                            </div>
-                            <div class="comment-section" style="display: none;">
-                                <h4>Comments:</h4>
-                                <div class="comment">
-                                    <strong>Parveen:</strong> Can't wait! 😋
-                                </div>
-                                <textarea class="comment-input" placeholder="Add a comment..."></textarea>
-                            </div>
-                        </div>
-                
-                        <div class="post-card">
-                            <img src="{% static 'temple.jpeg' %}" alt="Special Pooja" class="post-image">
-                            <h3>Special Pooja in Temple</h3>
-                            <p>🙏 Join us for a special Pooja at the temple this Sunday! 🌸</p>
-                            <div class="post-actions">
-                                <button class="like-button" onclick="likePost(this)">Like</button>
-                                <span class="like-count">0</span>
-                                <button onclick="toggleComments(this)">Comment</button>
-                            </div>
-                            <div class="comment-section" style="display: none;">
-                                <h4>Comments:</h4>
-                                <div class="comment">
-                                    <strong>Neelam:</strong> Looking forward to it! 🕉️
-                                </div>
-                                <textarea class="comment-input" placeholder="Add a comment..."></textarea>
-                            </div>
-                        </div>
+                    <p><strong> 📅 Date:</strong> {{ event.date }}</p>
+                    <br>
+                </br>
+                    📍 Venue: Holy Chowk, Mullana
+                    <br>
+                </br>
+                    ⏰ Time: 12:00 AM
+                    <br>
+                </br>
+                <p>{{ event.description }}</p>
 
+                    <br>
+
+                </p>
+    
+            <div class="post-actions">
+                    <button class="like-button" onclick="likePost(this)">Like</button>
+                    <span class="like-count">0</span>
+                    <button onclick="toggleComments(this)">Comment</button>
+                </div>
+                <div class="comment-section" style="display: none;">
+                    <h4>Comments:</h4>
+                    <div class="comment">
+                        <strong>Parveen:</strong> Can't wait! 😋
+                    </div>
+                    <textarea class="comment-input" placeholder="Add a comment..."></textarea>
+                </div>
+            </div>
+              
+            {% endfor %}
+        {% else %}
+            <p>No upcoming events.</p>
+        {% endif %}
                     </div>
                 </td>
 
                 <td style="vertical-align: top; padding: 10px;">
                     <div class="post-container">
-                
-                        <div class="post-card">
-                            <h3>Karan Singh : </h3>
-                            <p>Join us for a community clean-up day this Saturday! Let's make our neighborhood beautiful! 🧹 </p>
-                            <b>Clean India, Green India !</b>
-                            <div class="post-actions">
-                                <button class="like-button" onclick="likePost(this)">Like</button>
-                                <span class="like-count">0</span>
-                                <button onclick="toggleComments(this)">Comment</button>
-                            </div>
-                            <div class="comment-section" style="display: none;">
-                                <h4>Comments:</h4>
-                                <div class="comment">
-                                    <strong>Prachi :</strong> I'm in! 💪
-                                </div>
-                                <textarea class="comment-input" placeholder="Add a comment..."></textarea>
-                            </div>
+                            {% if posts %}
+            {% for post in posts %}
+                <div class="post-card">
+                    <h3>{{ post.user.username }}:</h3>
+                    <p>{{ post.content }}</p>
+                    <div class="post-actions">
+                        <button class="like-button" onclick="likePost(this)">Like</button>
+                        <span class="like-count">0</span>
+                        <button onclick="toggleComments(this)">Comment</button>
+                    </div>
+                    <div class="comment-section" style="display: none;">
+                        <h4>Comments:</h4>
+                        <div class="comment">
+                            <strong>Prachi :</strong> I'm in! 💪
                         </div>
-                    
-                        <div class="post-card">
-                            <h3>Kabir : </h3>
-                            <p>Hey Everyone! 🎉<br><br>
-                                I am very happy to share that I have successfully been placed in my dream company, Google! 🚀</p>
-                                                            <div class="post-actions">
-                                <button class="like-button" onclick="likePost(this)">Like</button>
-                                <span class="like-count">0</span>
-                                <button onclick="toggleComments(this)">Comment</button>
-                            </div>
-                            <div class="comment-section" style="display: none;">
-                                <h4>Comments:</h4>
-                                <div class="comment">
-                                    <strong>Shikhar :</strong> You Deserved it ! 💪
-                                </div>
-                                <textarea class="comment-input" placeholder="Add a comment..."></textarea>
-                            </div>
-                        </div>
-                
-                        <div class="post-card">
-                            <h3>Sunita :</h3>
-                            <p><p>🌟 Exciting News! 🎉 I have opened a new tuition class for students from 9th to 11th grade! 📚✨ For inquiries, please contact me at 📞 9834568358.</p>
-                        </p>
-                            <div class="post-actions">
-                                <button class="like-button" onclick="likePost(this)">Like</button>
-                                <span class="like-count">0</span>
-                                <button onclick="toggleComments(this)">Comment</button>
-                            </div>
-                            <div class="comment-section" style="display: none;">
-                                <h4>Comments:</h4>
-                                <div class="comment">
-                                    <strong>Nihaar:</strong> Congratulations!
-                                </div>
-                                <textarea class="comment-input" placeholder="Add a comment..."></textarea>
-                            </div>
-                        </div>
-                        <!-- Your post cards for upcoming events -->
-                        <div class="post-card">
-                            <h3>Vanshika :</h3>
-                            <p><p>📚📖 Exciting Announcement! 🌟 We are starting a Book Club! Join us for our first meeting on November 1st, 2024, at 5 PM in the library. Let's dive into some great reads together! 📅✨</p>
-                        </p>
-                            <div class="post-actions">
-                                <button class="like-button" onclick="likePost(this)">Like</button>
-                                <span class="like-count">0</span>
-                                <button onclick="toggleComments(this)">Comment</button>
-                            </div>
-                            <div class="comment-section" style="display: none;">
-                                <h4>Comments:</h4>
-                                <div class="comment">
-                                    <strong>Swapnil :</strong> I will definitely join ! 💪
-                                </div>
-                                <textarea class="comment-input" placeholder="Add a comment..."></textarea>
-                            </div>
-                        </div>
-                
-                        <div class="post-card">
-                            
-                            <h3>Anish :</h3>
-                            <p>Bring your favorite dish to share! Let's enjoy food and community together! 🍲</p>
-                            <div class="post-actions">
-                                <button class="like-button" onclick="likePost(this)">Like</button>
-                                <span class="like-count">0</span>
-                                <button onclick="toggleComments(this)">Comment</button>
-                            </div>
-                            <div class="comment-section" style="display: none;">
-                                <h4>Comments:</h4>
-                                <div class="comment">
-                                    <strong>Jaskiraat:</strong> Can't wait! 🍽️
-                                </div>
-                                <textarea class="comment-input" placeholder="Add a comment..."></textarea>
-                            </div>
-                        </div>
+                        <textarea class="comment-input" placeholder="Add a comment..."></textarea>
+                    </div>
+                    <p><small>Posted on: {{ post.timestamp|date:"M d, Y H:i" }}</small></p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No posts available.</p>
+        {% endif %}
                     </div>
                 </td>
             </tr>

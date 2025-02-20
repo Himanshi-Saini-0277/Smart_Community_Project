@@ -1,36 +1,41 @@
+
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
-
+from django.utils import timezone
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    username = models.CharField(max_length=150, unique=True)
     full_name = models.CharField(max_length=255)
-    email = models.EmailField(max_length=255)
-    phone_number = models.CharField(max_length=10, unique=True)
-    password = models.CharField(max_length=255)
-    postal_code = models.CharField(max_length=6)
-    postal_area = models.CharField(max_length=255)
+    email = models.EmailField(max_length=255, unique=True)
+    phone = models.CharField(max_length=10, unique=True)
+    pincode = models.CharField(max_length=6)
+    town = models.CharField(max_length=255)
 
     def __str__(self):
-        return f"{self.user.username} - {self.postal_area}"
+        return f"{self.username} - {self.town}"
 
 class Post(models.Model):
-    title = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts',null=True, blank=True)
+    title = models.CharField(max_length=255)
     content = models.TextField()
-    image = models.TextField()
-
+    image = models.ImageField(upload_to='post_images/', blank=True, null=True)
+    timestamp = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return f"Post by {self.user.user.username} at {self.timestamp}"
+        return f"Post by {self.user.username} at {self.timestamp}"
 
 class Event(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='events',null=True, blank=True)
     name = models.CharField(max_length=255)
     date = models.DateField()
     description = models.TextField()
-
+    image = models.ImageField(upload_to='event_images/', blank=True, null=True)  # New field
 
     def __str__(self):
-        return self.name
+        return f"{self.name} on {self.date}"
+
+
 
 class Comment(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -39,4 +44,4 @@ class Comment(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'Comment by {self.author} on {self.post}'
+        return f"Comment by {self.author.username} on {self.post.title}"
