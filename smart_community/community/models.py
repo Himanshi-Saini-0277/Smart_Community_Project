@@ -28,7 +28,7 @@ class Post(models.Model):
 class Event(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='events',null=True, blank=True)
     name = models.CharField(max_length=255)
-    date = models.DateField()
+    date = models.DateField(default=timezone.now)
     description = models.TextField()
     image = models.ImageField(upload_to='event_images/', blank=True, null=True)  # New field
 
@@ -38,10 +38,10 @@ class Event(models.Model):
 
 
 class Comment(models.Model):
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Event, on_delete=models.CASCADE, related_name="comments")
     content = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Comment by {self.author.username} on {self.post.title}"
+        return f"{self.author} - {self.content[:30]}"

@@ -3,11 +3,12 @@ from django.conf.urls.static import static
 from django.urls import path
 from .views import entrance_view
 from community import views
+from .views import event_detail
 
 urlpatterns = [
     path('home/', views.home, name='home'),
     path('', entrance_view, name='entrance'),
-    path('event/<int:pk>/', views.event_detail, name='event_detail'), 
+    path('event/<int:pk>/', event_detail, name='event_detail'), 
     path('create_post/', views.create_post, name='create_post'),
     path('create_event/', views.create_event, name='create_event'),
     path('register/', views.register, name='register'),

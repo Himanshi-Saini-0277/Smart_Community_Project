@@ -130,6 +130,22 @@
             background-color: #388e3c;
         }
 
+        .image-button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+            display: block;
+            text-align: center;
+        }
+        .image-button:hover {
+            background-color: #388e3c;
+        }
+
         .success-message {
             display: none;
             background-color: #e0f7fa;
@@ -205,7 +221,7 @@
             </div>
             
             <div class="upload-photo">
-                <label for="id_image">Choose Photo</label>
+                <label for="id_image" class="image-button" style="">Choose Photo</label>
                 <input type="file" name="image" id="id_image" accept="image/*">
             </div>
             

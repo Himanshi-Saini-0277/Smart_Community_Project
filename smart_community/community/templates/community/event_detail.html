@@ -1,0 +1,19 @@
+<div class="comment-section">
+    <h4>Comments:</h4>
+    {% for comment in comments %}
+        <div class="comment">
+            <strong>{{ comment.user.username }}:</strong> {{ comment.content }}
+            <br>
+            <small>{{ comment.timestamp|date:"M d, Y H:i" }}</small>
+        </div>
+    {% empty %}
+        <p>No comments yet. Be the first to comment!</p>
+    {% endfor %}
+
+    <!-- Comment Form -->
+    <form method="post" action="{% url 'event_detail' event.id %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Post Comment</button>
+    </form>
+</div>

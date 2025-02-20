@@ -61,7 +61,7 @@
 
         .container {
             width: 80%;
-            margin: 40px auto;
+            margin: 20px auto;
             animation: fadeIn 1s ease;
         }
 
@@ -83,7 +83,7 @@
         .but-container {
             display: flex;
             justify-content: space-around;
-            margin-bottom: 50px;
+            margin-bottom: 30px;
             padding: 20px 0;
         }
 
@@ -128,7 +128,7 @@
             box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
             padding: 30px;
             border-radius: 20px;
-            margin-bottom: 30px;
+            margin-bottom: 10px;
             transition: all 0.1s ease;
             position: relative;
         }
@@ -279,33 +279,18 @@
             <tr>
                 <td style="vertical-align: top; padding: 10px;">
                     <div class="post-container">
-                        {% if events %}
+        {% if events %}
             {% for event in events %}
             <div class="post-card">
+                <div style="justify-content: space-between; align-items: center; width: 100%;">
+                    <h5 style="margin: 0;">{{ event.user.username }}:</h5>
+                    <h3 style="margin: 0; text-align: center; flex-grow: 1;">{{ event.name}}</h3>
+                </div>
+                <br>
                 {% if event.image %}
-                        <img src="{{ event.image.url }}" alt="Post Image" class="post-image">
-                        
+                <img src="{{ event.image.url }}" alt="Post Image" class="post-image">
                     {% endif %}
-                <h3>{{ event.title }}</h3>
-                <p>🌟 Bhandara Invitation 🌟
-                    <br>
-                </br>
-                You are cordially invited to attend the Bhandara event!
-                    <br>
-                </br>    
-                
-                    <p><strong> 📅 Date:</strong> {{ event.date }}</p>
-                    <br>
-                </br>
-                    📍 Venue: Holy Chowk, Mullana
-                    <br>
-                </br>
-                    ⏰ Time: 12:00 AM
-                    <br>
-                </br>
-                <p>{{ event.description }}</p>
-
-                    <br>
+                <p>{{ event.description|linebreaks}}</p>
 
                 </p>
     
@@ -321,6 +306,7 @@
                     </div>
                     <textarea class="comment-input" placeholder="Add a comment..."></textarea>
                 </div>
+                <p><small>Posted on: {{ event.date|date:"" }}</small></p>
             </div>
               
             {% endfor %}
@@ -335,8 +321,12 @@
                             {% if posts %}
             {% for post in posts %}
                 <div class="post-card">
-                    <h3>{{ post.user.username }}:</h3>
-                    <p>{{ post.content }}</p>
+                    <div style="justify-content: space-between; align-items: center; width: 100%;">
+                        <h5 style="margin: 0;">{{ post.user.username }}:</h5>
+                        <h3 style="margin: 0; text-align: center; flex-grow: 1;">{{ post.title }}</h3>
+                    </div>
+                    
+                    <p>{{ post.content|linebreaks }}</p>
                     <div class="post-actions">
                         <button class="like-button" onclick="likePost(this)">Like</button>
                         <span class="like-count">0</span>
@@ -345,9 +335,9 @@
                     <div class="comment-section" style="display: none;">
                         <h4>Comments:</h4>
                         <div class="comment">
-                            <strong>Prachi :</strong> I'm in! 💪
+                            <strong>Prachi:</strong> All Set! 😋
                         </div>
-                        <textarea class="comment-input" placeholder="Add a comment..."></textarea>
+                            <textarea class="comment-input" placeholder="Add a comment..."></textarea>
                     </div>
                     <p><small>Posted on: {{ post.timestamp|date:"M d, Y H:i" }}</small></p>
                 </div>
@@ -364,7 +354,13 @@
     <script>
         function likePost(button) {
             const likeCount = button.nextElementSibling;
-            likeCount.innerText = parseInt(likeCount.innerText) + 1;
+            let count = parseInt(likeCount.innerText);  // Convert text to integer
+
+            if (count === 0) {  
+                likeCount.innerText = count + 1;  // Increment count if it's 0
+            } else {
+                likeCount.innerText = count;  // Keep count unchanged
+            }
         }
 
         function toggleComments(button) {

@@ -11,10 +11,13 @@ from django.shortcuts import render, get_object_or_404
 from django.shortcuts import render
 from django.db.models import Q
 from .models import UserProfile, Post, Event
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Event, Comment
+from .forms import CommentForm
 
 def home(request):
     posts = Post.objects.none()
-    events = Event.objects.none()
+    events = Event.objects.all()
     
     if request.user.is_authenticated:
         try:
@@ -169,6 +172,22 @@ def create_event(request):
             event_detail = Event.objects.create(name=title, description=content, image=image,user=request.user,date=timezone.now())
             event_detail.save()
     else:
-        return redirect('home')
+        return redirect('community/home.html')
     
     return render(request, 'community/create_event.html')
+
+def event_detail(request, pk):
+    event = get_object_or_404(Event, pk=pk)
+    comments = event.comments.all()
+    form = CommentForm()
+
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.author = request.user
+            comment.event = event
+            comment.save()
+            return redirect('event_detail', pk=event.pk)  # Refresh the page
+
+    return render(request, 'event_detail.html', {'event': event, 'comments': comments, 'form': form})
